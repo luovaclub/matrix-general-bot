@@ -1,10 +1,11 @@
 import { LogService, MatrixClient, MessageEvent, RichReply, UserID } from "matrix-bot-sdk";
 import { runHelloCommand } from "./hello";
+import { runInviteCommand, runInvitecommand } from "./invite";
 import * as htmlEscape from "escape-html";
 
 // The prefix required to trigger the bot. The bot will also respond
 // to being pinged directly.
-export const COMMAND_PREFIX = "!bot";
+export const COMMAND_PREFIX = "!luovabot";
 
 // This is where all of our commands will be handled
 export default class CommandHandler {
@@ -58,10 +59,15 @@ export default class CommandHandler {
         try {
             if (args[0] === "hello") {
                 return runHelloCommand(roomId, event, args, this.client);
-            } else {
+            } 
+            else if (args[0] === "invite") {
+                return runInviteCommand(roomId, event, args, this.client)
+            }
+            else {
                 const help = "" +
                     "!bot hello [user]     - Say hello to a user.\n" +
-                    "!bot help             - This menu\n";
+                    "!bot help             - This menu\n" +
+                    "!bot invite [user]    - Invite user to this room.\n";
 
                 const text = `Help menu:\n${help}`;
                 const html = `<b>Help menu:</b><br /><pre><code>${htmlEscape(help)}</code></pre>`;
