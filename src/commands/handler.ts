@@ -61,7 +61,15 @@ export default class CommandHandler {
                 return runHelloCommand(roomId, event, args, this.client);
             } 
             else if (args[0] === "invite") {
-                return runInviteCommand(roomId, event, args, this.client);
+                let invite = args[1];
+                if (invite.startsWith("@")) {
+                    const mention = await MentionPill.forUser(invite, roomId, client);
+                    return client.sendMessage(roomId, {
+                    body: "`/invite ${mention.text}`",
+                    msgtype: "m.text",
+    });   
+    }
+}
             }
             else {
                 const help = "" +
