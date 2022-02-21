@@ -1,8 +1,10 @@
 import { LogService, MatrixClient, MessageEvent, RichReply, UserID } from "matrix-bot-sdk";
+import * as htmlEscape from "escape-html";
 import { runHelloCommand } from "./hello";
 import { runInviteCommand } from "./invite";
 import { runKickCommand } from "./kick"
 import { runBanCommand } from "./ban"
+import { runUnbanCommand } from "./unban"
 
 // The prefix required to trigger the bot. The bot will also respond
 // to being pinged directly.
@@ -70,8 +72,10 @@ export default class CommandHandler {
             else if (args[0] === "ban") {
                 return runBanCommand(roomId, event, args, this.client);
             }
-            
-            )            
+            else if (args[0] === "unban") {
+                return runUnbanCommand(roomId, event, args, this.client)
+            }
+                        
             else {
                 const help = "" +
                     "!bot hello [user]              - Say hello to a user.\n" +
@@ -79,7 +83,7 @@ export default class CommandHandler {
                     "!bot invite [user]             - Invite user to this room.\n" +
                     "!bot kick [user] [message]     - Kick user from this room- \n" +
                     "!bot ban [user] [message]      - Bans user from this room. \n" +
-
+                    "!bot unban [user]              - Unbans user from this room \n";
 
                 const text = `Help menu:\n${help}`;
                 const html = `<b>Help menu:</b><br /><pre><code>${htmlEscape(help)}</code></pre>`;
