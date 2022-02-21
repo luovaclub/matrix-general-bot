@@ -1,7 +1,8 @@
 import { LogService, MatrixClient, MessageEvent, RichReply, UserID } from "matrix-bot-sdk";
 import { runHelloCommand } from "./hello";
 import { runInviteCommand } from "./invite";
-import * as htmlEscape from "escape-html";
+import { runKickCommand } from "./kick"
+import { runBanCommand } from "./ban"
 
 // The prefix required to trigger the bot. The bot will also respond
 // to being pinged directly.
@@ -61,21 +62,24 @@ export default class CommandHandler {
                 return runHelloCommand(roomId, event, args, this.client);
             } 
             else if (args[0] === "invite") {
-                let invite = args[1];
-                if (invite.startsWith("@")) {
-                    const mention = await MentionPill.forUser(invite, roomId, client);
-                    return client.sendMessage(roomId, {
-                    body: "`/invite ${mention.text}`",
-                    msgtype: "m.text",
-    });   
-    }
-}
+                return runInviteCommand(roomId, event, args, this.client);
             }
+            else if (args[0] === "kick") {
+                return runKickCommand(roomId, event, args, this.client);
+            }
+            else if (args[0] === "ban") {
+                return runBanCommand(roomId, event, args, this.client);
+            }
+            
+            )            
             else {
                 const help = "" +
-                    "!bot hello [user]     - Say hello to a user.\n" +
-                    "!bot help             - This menu\n" +
-                    "!bot invite [user]    - Invite user to this room.\n";
+                    "!bot hello [user]              - Say hello to a user.\n" +
+                    "!bot help                      - This menu\n" +
+                    "!bot invite [user]             - Invite user to this room.\n" +
+                    "!bot kick [user] [message]     - Kick user from this room- \n" +
+                    "!bot ban [user] [message]      - Bans user from this room. \n" +
+
 
                 const text = `Help menu:\n${help}`;
                 const html = `<b>Help menu:</b><br /><pre><code>${htmlEscape(help)}</code></pre>`;
