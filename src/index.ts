@@ -10,7 +10,7 @@ import {
 import * as path from "path";
 import config from "./config";
 import CommandHandler from "./commands/handler";
-
+const trusted = config.trusted
 // First things first: let's make the logs a bit prettier.
 LogService.setLogger(new RichConsoleLogger());
 

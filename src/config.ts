@@ -1,4 +1,4 @@
-import * as config from "config";
+import * as config from "./config";
 
 interface IConfig {
     homeserverUrl: string;
@@ -6,6 +6,7 @@ interface IConfig {
     autoJoin: boolean;
     dataPath: string;
     encryption: boolean;
+    trusted: string;
 }
 
-export default <IConfig>config;
+export default <IConfig><unknown>config;
