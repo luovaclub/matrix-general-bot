@@ -1,10 +1,10 @@
 import { LogService, MatrixClient, MessageEvent, RichReply, UserID } from "matrix-bot-sdk";
 import * as htmlEscape from "escape-html";
-import { runHelloCommand } from "./hello";
-import { runInviteCommand } from "./invite";
-import { runKickCommand } from "./kick"
-import { runBanCommand } from "./ban"
-import { runUnbanCommand } from "./unban"
+import { runHelloCommand } from "./commands";
+import { runInviteCommand } from "./commands";
+import { runKickCommand } from "./commands"
+import { runBanCommand } from "./commands"
+import { runUnbanCommand } from "./commands"
 
 // The prefix required to trigger the bot. The bot will also respond
 // to being pinged directly.
