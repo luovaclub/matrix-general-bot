@@ -1,6 +1,6 @@
 import { MatrixClient, MentionPill, MessageEvent, MessageEventContent } from "matrix-bot-sdk";
 import * as htmlEscape from "escape-html";
-const trusted = "@vuoreol:elokapina.fi";
+const trusted = "TRUSTEDUSERNAMEHERE";
 export async function runBanCommand(roomId: string, event: MessageEvent<MessageEventContent>, args: string[], client: MatrixClient) {
     const sender = event.sender;
     let userId = args[1];
