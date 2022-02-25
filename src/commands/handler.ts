@@ -5,6 +5,7 @@ import { runInviteCommand } from "./commands";
 import { runKickCommand } from "./commands"
 import { runBanCommand } from "./commands"
 import { runUnbanCommand } from "./commands"
+import { runSendmessageCommand } from "./commands"
 
 // The prefix required to trigger the bot. The bot will also respond
 // to being pinged directly.
@@ -74,6 +75,9 @@ export default class CommandHandler {
             }
             else if (args[0] === "unban") {
                 return runUnbanCommand(roomId, event, args, this.client)
+            }
+            else if (args[0] === "message") {
+                return runSendmessageCommand(roomId, event, args, this.client)
             }
                         
             else {
